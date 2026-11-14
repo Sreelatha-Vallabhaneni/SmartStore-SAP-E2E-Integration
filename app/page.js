@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import { Button } from "./components/ui/button";
 import { Navbar } from "./components/NavBar";
 import { SettingsDialog } from "./components/SettingsDialog";
+import { Footer } from "./components/Footer";
 
 export default function Home() {
   const [settingsOpen, setSettingsOpen] = useState(false);
@@ -51,6 +52,9 @@ export default function Home() {
           setSettingsOpen(true);
         }}
       />
+      <main>
+        <Footer />
+      </main>
       <SettingsDialog
         open={settingsOpen}
         onOpenChange={setSettingsOpen}
