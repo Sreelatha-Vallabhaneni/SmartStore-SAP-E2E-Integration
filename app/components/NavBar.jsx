@@ -5,7 +5,7 @@ import { Button } from "./ui/button";
 
 export function Navbar({ onOpenSettings }) {
   return (
-    <nav className="flex w-full items-center justify-between mb-8">
+    <nav className="flex w-full items-center justify-between">
         <div className="flex items-center space-x-4">
             <div className="w-10 h-10 relative bg-blue-900 rounded-xl flex items-center justify-center text-white font-bold">
                 <ShoppingBag size={24} strokeWidth={1.8} />
