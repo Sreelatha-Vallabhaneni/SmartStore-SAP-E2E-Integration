@@ -1,6 +1,4 @@
 "use client";
-import { ShoppingBag, Settings2 } from "lucide-react";
-import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { ChevronRight, CircleCheck, Send, Zap } from "lucide-react";
 import { defaultCustomer, products, orderPriority, validPostalCode } from "@/lib/orders";
@@ -8,6 +6,10 @@ import { Navbar } from "./components/NavBar";
 import { SettingsDialog } from "./components/SettingsDialog";
 import { Footer } from "./components/Footer";
 import { OrderForm } from "./components/OrderForm";
+import { IntegrationMonitor } from "./components/IntegrationMonitor";
+import { RecentOrders } from "./components/RecentOrders";
+
+const wait = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
 export default function Home() {
    const [customer, setCustomer] = useState(defaultCustomer);
@@ -153,15 +155,17 @@ export default function Home() {
   }
 
   return (
-    <div className="flex min-h-screen flex-col items-center justify-between px-12 py-10">
-      <Navbar
-        onOpenSettings={() => {
-          setDraft(settings);
-          setSettingsOpen(true);
-        }}
-      />
-      <main>
-        <div className="flex justify-between items-start gap-3">
+    <div className=" flex flex-col justify-between min-h-screen">
+      <header className="app-header px-15 py-6">
+        <Navbar
+          onOpenSettings={() => {
+            setDraft(settings);
+            setSettingsOpen(true);
+          }}
+        />
+      </header>
+      <main className =" px-15 py-10">
+        <div className="flex justify-between items-start">
           <div>
             <div className="flex items-center gap-2 text-xs text-muted-foreground mb-2">
               <span>Workspace</span>
@@ -232,8 +236,7 @@ export default function Home() {
             onSubmit={submit}
             onFill={fill}
           />
-
-          {/* <IntegrationMonitor
+          <IntegrationMonitor
             busy={busy}
             failed={failed}
             stage={stage}
@@ -242,8 +245,9 @@ export default function Home() {
             response={response}
             tab={tab}
             setTab={setTab}
-          /> */}
+          />
         </div>
+        <RecentOrders orders={orders} />
         <Footer />
       </main>
       <SettingsDialog
