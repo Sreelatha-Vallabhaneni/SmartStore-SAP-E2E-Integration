@@ -39,3 +39,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+
+# SAP BTP Service Keys & Local Secrets
+*service-key*.json
+*credentials*.json
+*.p12
+*.jks
