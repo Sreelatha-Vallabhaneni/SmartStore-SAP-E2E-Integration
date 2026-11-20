@@ -85,8 +85,7 @@ export default function Home() {
   }
 
   /************ On submit Function ****************/
-
-  async function submit(event) {
+    async function submit(event) {
     event.preventDefault();
     if (!product || busy || !Number.isInteger(quantity) || quantity < 1) return;
 
@@ -115,30 +114,26 @@ export default function Home() {
     await wait(700);
     if (!mounted.current) return;
 
-    let success = validPostalCode(order.customer.postalCode);
-    let result = `HTTP ${success ? "200 OK" : "400 Bad Request"}\nX-Order-Priority: ${order.priority}\nContent-Type: application/json\n\n${JSON.stringify({ orderId: order.orderId, status: success ? "SUCCESS" : "ERROR", message: success ? "Sales order successfully created in S/4HANA." : "Exception Subprocess HTTP 400: Danish postal code must contain exactly 4 digits." }, null, 2)}`;
+    let success = false;
+    let result = "";
 
-    if (live) {
-      try {
-        const controller = new AbortController();
-        const timeout = setTimeout(() => controller.abort(), 15000);
-        try {
-          const res = await fetch(settings.url, {
-            method: "POST",
-            headers: { "Content-Type": "application/json", APIKey: settings.key },
-            body: JSON.stringify(order),
-            signal: controller.signal,
-          });
-          success = res.ok;
-          result = `HTTP ${res.status} ${res.statusText}\nX-Order-Priority: ${res.headers.get("X-Order-Priority") ?? "Not provided"}\n\n${await res.text()}`;
-        } finally {
-          clearTimeout(timeout);
-        }
-      } catch {
-        success = false;
-        result =
-          "Connection error\n\nSAP proxy could not be reached. Check the URL, API key, and browser CORS permissions.";
-      }
+    try {
+      const res = await fetch("/api/submit-order", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          order,
+          customUrl: settings.url,
+          customKey: settings.key,
+        }),
+      });
+
+      success = res.ok;
+      const responseData = await res.json();
+      result = `HTTP ${res.status} ${res.statusText}\nX-Order-Priority: ${res.headers.get("X-Order-Priority") ?? order.priority}\nContent-Type: application/json\n\n${JSON.stringify(responseData, null, 2)}`;
+    } catch {
+      success = false;
+      result = "Connection error\n\nCould not reach Next.js API route (/api/submit-order).";
     }
 
     if (!mounted.current) return;
@@ -153,6 +148,74 @@ export default function Home() {
     setBusy(false);
     setTab("SAP Response");
   }
+
+  // async function submit(event) {
+  //   event.preventDefault();
+  //   if (!product || busy || !Number.isInteger(quantity) || quantity < 1) return;
+
+  //   const order = {
+  //     orderId: `SO-2026-${String(orders.length + 1).padStart(4, "0")}`,
+  //     customer: { ...customer },
+  //     product: product.name,
+  //     quantity,
+  //     totalAmount: total,
+  //     currency: "EUR",
+  //     priority,
+  //   };
+
+  //   setPayload(order);
+  //   setBusy(true);
+  //   setFailed(false);
+  //   setResponse("");
+  //   setTab("Outgoing JSON");
+  //   setStage(0);
+  //   await wait(500);
+  //   if (!mounted.current) return;
+  //   setStage(1);
+  //   await wait(650);
+  //   if (!mounted.current) return;
+  //   setStage(2);
+  //   await wait(700);
+  //   if (!mounted.current) return;
+
+  //   let success = validPostalCode(order.customer.postalCode);
+  //   let result = `HTTP ${success ? "200 OK" : "400 Bad Request"}\nX-Order-Priority: ${order.priority}\nContent-Type: application/json\n\n${JSON.stringify({ orderId: order.orderId, status: success ? "SUCCESS" : "ERROR", message: success ? "Sales order successfully created in S/4HANA." : "Exception Subprocess HTTP 400: Danish postal code must contain exactly 4 digits." }, null, 2)}`;
+
+  //   if (live) {
+  //     try {
+  //       const controller = new AbortController();
+  //       const timeout = setTimeout(() => controller.abort(), 15000);
+  //       try {
+  //         const res = await fetch(settings.url, {
+  //           method: "POST",
+  //           headers: { "Content-Type": "application/json", APIKey: settings.key },
+  //           body: JSON.stringify(order),
+  //           signal: controller.signal,
+  //         });
+  //         success = res.ok;
+  //         result = `HTTP ${res.status} ${res.statusText}\nX-Order-Priority: ${res.headers.get("X-Order-Priority") ?? "Not provided"}\n\n${await res.text()}`;
+  //       } finally {
+  //         clearTimeout(timeout);
+  //       }
+  //     } catch {
+  //       success = false;
+  //       result =
+  //         "Connection error\n\nSAP proxy could not be reached. Check the URL, API key, and browser CORS permissions.";
+  //     }
+  //   }
+
+  //   if (!mounted.current) return;
+  //   setResponse(result);
+  //   setFailed(!success);
+  //   if (success) {
+  //     setStage(3);
+  //     await wait(500);
+  //   }
+  //   if (!mounted.current) return;
+  //   setOrders((previous) => [{ order, success, response: result }, ...previous]);
+  //   setBusy(false);
+  //   setTab("SAP Response");
+  // }
 
   return (
     <div className=" flex flex-col justify-between min-h-screen">
