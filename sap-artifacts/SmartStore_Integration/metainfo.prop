@@ -1,0 +1,3 @@
+#Store metainfo properties
+#Fri Nov 20 11:21:18 UTC 2026
+description=this iflow demonstrate the process of sales order using API security, JSON-to-XML payload transformation, Groovy-based business validation, content-based routing, message mapping, and structured exception handling, etc.

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:element name="SAP_SalesOrder">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element name="SalesOrderID" type="xs:string"/>
+        <xs:element name="CustomerName" type="xs:string"/>
+        <xs:element name="CustomerEmail" type="xs:string"/>
+        <xs:element name="CountryKey" type="xs:string"/>
+        <xs:element name="ShippingPostalCode" type="xs:string"/>
+        <xs:element name="MaterialName" type="xs:string"/>
+        <xs:element name="OrderQuantity" type="xs:int"/>
+        <xs:element name="NetAmount" type="xs:decimal"/>
+        <xs:element name="CurrencyCode" type="xs:string"/>
+        <xs:element name="PriorityFlag" type="xs:string"/>
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<ProxyEndPoint default="true" xmlns="http://www.sap.com/apimgmt">
+    <name>default</name>
+    <base_path>/v1/smartstore/orders</base_path>
+    <properties/>
+    <routeRules>
+        <routeRule>
+            <name>default</name>
+            <targetEndPointName>default</targetEndPointName>
+            <sequence>1</sequence>
+            <faultRules/>
+        </routeRule>
+    </routeRules>
+    <faultRules/>
+    <preFlow>
+        <name>PreFlow</name>
+        <request>
+            <isRequest>true</isRequest>
+            <steps>
+                <step>
+                    <policy_name>VerifyAPIKey_SS_Order</policy_name>
+                    <condition></condition>
+                    <sequence>2</sequence>
+                </step>
+                <step>
+                    <policy_name>SpikeArrest_Orders</policy_name>
+                    <condition></condition>
+                    <sequence>1</sequence>
+                </step>
+            </steps>
+        </request>
+    </preFlow>
+    <postFlow>
+        <name>PostFlow</name>
+    </postFlow>
+    <conditionalFlows/>
+</ProxyEndPoint>
