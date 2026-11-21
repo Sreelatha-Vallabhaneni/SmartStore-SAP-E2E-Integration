@@ -46,4 +46,4 @@ next-env.d.ts
 *credentials*.json
 *.p12
 *.jks
-/sap-artifacts/SAP_INTEGRATION_TECH_DOCS.md
+# /sap-artifacts/SAP_INTEGRATION_TECH_DOCS.md
