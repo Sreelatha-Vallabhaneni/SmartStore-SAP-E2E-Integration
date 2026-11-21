@@ -10,7 +10,7 @@
 This document details the middleware design built on **SAP BTP Integration Suite** to receive B2B sales orders from a Next.js web application, enforce API security policies, validate business rules (Danish 4-digit postal code), route orders by monetary value, and handle exceptions gracefully.
 
 ### 📸 End-to-End Flow & Live Cockpit Preview
-`./screenshots/01-nextjs-live-cockpit.png`
+`/sap-artifacts/screenshots/01-nextjs-live-cockpit.png`
 
 > **[INSERT IMAGE HERE: `screenshots/01-nextjs-live-cockpit.png` — Screenshot of your Next.js UI showing 4/4 green pipeline steps and HTTP 200 OK response]**
 
