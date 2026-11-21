@@ -1,13 +1,13 @@
 # 🛒 SmartStore | End-to-End B2B Order-to-SAP Integration Cockpit
 
-[![Live Demo](https://shields.io)](https://netlify.app)
+[![Live Demo](https://shields.io)](https://smartstore-sap-e2e-integration.netlify.app/)
 [![Next.js](https://shields.io)](https://nextjs.org)
 [![SAP Integration Suite](https://shields.io)](https://sap.com)
 [![Groovy](https://shields.io)](https://groovy-lang.org)
 
 **SmartStore** is a full-stack B2B Order-to-SAP integration solution and real-time observability cockpit. It demonstrates how a modern **Next.js** web application securely communicates with **SAP Cloud Integration (CPI)** through **SAP API Management**, featuring real-time payload inspection (Outgoing JSON, Transformed XML, and SAP HTTP Responses), automated business rule validation, content-based routing, and fault-tolerant error handling.
 
-🌐 **Live Interactive App:** [smartstore-sap-e2e-integration.netlify.app](https://netlify.app)  
+🌐 **Live Interactive App:** [smartstore-sap-e2e-integration.netlify.app](https://smartstore-sap-e2e-integration.netlify.app/)  
 _(Note: Works out-of-the-box in **Simulation Mode** when an SAP BTP trial tenant is offline, or connects directly to a live SAP tenant via **SAP Settings**.)_
 
 ---
@@ -147,4 +147,4 @@ SmartStore-SAP-E2E-Integration/
 ## 👩‍💻 Author
 
 **Sreelatha Vallabhaneni** — Full-Stack Web Developer & SAP Integration Developer  
-🌐 **Portfolio:** [sv-portfolio-v2.netlify.app](https://netlify.app)
+🌐 **Portfolio:** [sv-portfolio-v2.netlify.app](https://smartstore-sap-e2e-integration.netlify.app/)
